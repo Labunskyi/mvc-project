@@ -1,0 +1,16 @@
+<head>
+  <style type="text/css">
+    .main {
+	height: 1000px;
+}
+  </style>
+</head>
+Список жанров
+<br/>
+
+<?php foreach($data['category'] as $category_data) {?>
+    <div style="margin-top: 0px;">
+	    <a href="/categories/view/<?=strtolower($category_data['id_category'])?>"><?=$category_data['name_category']?></a>
+	</div>
+	
+<?php } ?>

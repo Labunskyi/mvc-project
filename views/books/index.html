@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><?=Config::get('site_name')?></title>
+	<link rel="stylesheet" href="/webroot/css/style.css">
+	
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+<?php foreach($data['books'] as $book_data) { ?>
+<?php if (isset($book_data['image'])) : ?>
+<div class="item_block">
+    
+            <div class="item_block_img"><a href="/books/view/<?=$book_data['alias']?>"><img src="/webroot/image/<?= $book_data['image']; ?>"></a></div>
+            <div class="item_block_desc"><a href="/books/view/<?=$book_data['alias']?>"><?=$book_data['title']?></a></div>
+    
+          <div class="item_block_price">
+                  <div class="dop_new_price">Купить <?=$book_data['price']?> грн.</div> 
+		   </div>
+</div>
+<?php endif; ?>
+<?php } ?>
+
+<?php if (!isset($_GET['page'])) $_GET['page'] = 1; ?>
+<nav aria-label="...">
+  <ul class="pagination">
+      <?php for ($j = 1; $j <= ($data['books']['count']); $j++) : ?>
+            <li class="page-item active <?= ($j != $_GET['page']) ? 'class="page-item active"' : ''; ?>>
+			<li class="page-item"><a class="page-link" href="/books/?page=<?= $j; ?>"><?= $j; ?></a></li>
+			
+        <?php endfor; ?>
+    
+   
+  </ul>
+</nav>
+</body>
+</html>

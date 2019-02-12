@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title><?=Config::get('site_name')?></title>
+	<link rel="stylesheet" href="/webroot/css/style.css">
+	<script src="/webroot/js/admin.js"></script>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div id="container">
+		<header>
+			<h1> Мир Книг </h1>
+			<nav>
+				<ul id="topmenu">
+					<li>
+						<a href="/">
+							<span>Главная</span>
+						</a>
+					</li>
+					<li>
+						<a href="/categories/">
+							<span>Жанры</span>
+						</a>
+					</li>
+					<li>
+						<a href="/writers/">
+							<span>Авторы</span>
+						</a>
+					</li>
+					<li>
+						<a href="/contacts/">
+							<span>Контакты</span>
+						</a>
+					</li>
+					
+				</ul>
+			</nav>
+		</header>
+		<div id="top">
+			<div class="clear"></div>
+			<div id="search">
+				
+			</div>
+			<div id="auth">			
+				<?php if (Session::get('login')): ?>
+                    Здравствуйте <?= Session::get('login'); ?>
+                    <a href="/users/logout/">Выйти</a>
+                
+				<?php endif; ?>
+				<div id="links_reset">
+					
+				</div>
+			</div>
+		</div>
+		
+		<div id="content">
+			<div id="left">
+				<div class="block">
+					<div class="header">Меню</div>
+					<div class="content">
+						<nav>
+							<div>
+								<a class="active" href="/books/">Книги</a>
+							</div>
+							<div>
+								<a href="/categories/">Жанры</a>
+							</div>
+							<div>
+								<a href="/writers/">Авторы</a>
+							</div>
+							<div>
+								<a href="/contacts/">Контакты</a>
+							</div>
+							
+						</nav>
+					</div>
+				</div>
+				
+				
+			</div>
+			
+			<div id="center">
+				<div class="main">
+					<nav>
+						<p>Вы здесь: Главная</p>
+					</nav>
+					<div class="starter-template">
+						  <?php if (Session::hasFlash()) { ?>
+						  <div class="alert alert-info" role="alert">
+						  <?php Session::flash(); ?>
+						  </div>
+						 <?php } ?>
+						   <?=$data['content']?>
+	   
+ 
+					</div>
+				</div>
+				
+			</div>
+			<div class="clear"></div>
+		</div>
+		<footer>
+	
+			<p>Copyright &copy; Все права защищены.</p>
+		</footer>
+	</div>
+</body>
+</html>

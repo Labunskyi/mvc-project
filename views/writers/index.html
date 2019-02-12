@@ -1,0 +1,17 @@
+<head>
+  <style type="text/css">
+    .main {
+	height: 1000px;
+}
+  </style>
+</head>
+
+Список авторов
+
+<?php foreach($data['writers'] as $data) {?>
+    <div style="margin-top: 0px;">
+	    <a href="/writers/view/<?=$data['alias_writer']?>"><?=$data['writer']?></a>
+	</div>
+	
+<?php } ?>
+

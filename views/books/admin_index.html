@@ -1,0 +1,43 @@
+<h3>Books</h3>
+
+<ol class="breadcrumb">
+    
+    <?php print_r (App::getRouter()->getParams());?>
+</ol>
+
+<div class="admin_left" >
+            
+                
+                    <ul class="tt nav nav-pills nav-stacked">
+                        <li><a href="/admin/books/">Список книг</a></li>
+                        <li><a href="/admin/books/writer/">Добавить автора</a></li>
+                        <li><a href="/admin/books/add/">Добавить книгу</a></li>
+                        <li><a href="/admin/books/category/">Добавить жанр</a></li>
+                        <li><a href="/admin/books/sells">Список проданных товаров</a></li>
+						<li><a href="/admin/books/commentary">Комментарии</a></li>
+                    </ul>
+
+</div>
+<div class="admin_right">
+<table class="table table-striped">
+
+<?php foreach($data['books'] as $book_data) { ?>
+	<tr>
+		<td><b><?=$book_data['title']?></b></td>
+		<td align="right">
+			<a href="/admin/books/edit/<?=$book_data['id']?>"><button class="btn btn-sm btn-primary"> Edit </button></a>
+			<a href="/admin/books/delete/<?=$book_data['id']?>" onclick="return confirmDelete();">
+					<button class="btn btn-sm btn-warning"> Delete </button>
+			</a>
+		</td>
+	</tr>
+
+<?php } ?>
+
+</table>
+</div>
+
+<br/>
+<div>
+	<a href="/admin/books/add/"><button class="btn btn-sm btn-success"> New book </button></a>
+</div>

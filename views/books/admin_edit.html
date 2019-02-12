@@ -1,0 +1,79 @@
+<h3>Edit page</h3>
+<div class="admin">
+<ol class="breadcrumb">
+    
+    <?php print_r (App::getRouter()->getParams());?>
+</ol>
+<div class="admin_left style=">
+            
+                
+                    <ul class="tt nav nav-pills nav-stacked">
+                        <li><a href="/admin/books/">Список книг</a></li>
+                        <li><a href="/admin/books/writer/">Добавить автора</a></li>
+                        <li><a href="/admin/books/add/">Добавить книгу</a></li>
+                        <li><a href="/admin/books/category/">Добавить жанр</a></li>
+                        <li><a href="/admin/books/sells">Список проданных товаров</a></li>
+						<li><a href="/admin/books/commentary">Комментарии</a></li>
+                    </ul>
+</li>
+</div>
+<div class="admin_right style=">
+
+<form method="post" action="" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<?=$data['book']['id']?>" />
+	
+	<div class="form-group">
+	    <label for="alias">Alias</label>
+		<input type="text" id="alias" name="alias" value="<?=$data['book']['alias']?>" class="form-control" />
+    </div>
+	<div class="form-group">
+	    <label for="alias">Title</label>
+		<input type="text" id="title" name="title" value="<?=$data['book']['title']?>" class="form-control" />
+    </div>
+	<div class="form-group">
+	    <label for="alias">Price</label>
+		<input type="text" id="price" name="price" value="<?=$data['book']['price']?>" class="form-control" />
+    </div>
+	
+	<div class="form-group">
+	    <label for="alias">Content</label>
+		<textarea id="content" name="content" class="form-control"><?=$data['book']['content']?></textarea>
+    </div>
+	
+    <div class="form-group">
+	    <label for="alias">Publish?</label>
+		<input type="checkbox" id="is_published" name="is_published" <?php if ($data['book']['is_published']) {?> checked="checked"<?php } ?> />
+    </div>
+		
+    <div class="form-group">
+         <label for="id_category">Category</label>
+			
+         <select class="form-control" name="id_category" id="id_category">
+			   
+                <?php foreach ($data['category'] as $data): ?>
+				 
+                    <option value="<?php echo $data['id_category'];?>"><?php echo $data['name_category'];?></option>
+                <?php endforeach; ?>
+				
+          </select>
+			
+    </div>
+	<div class="checkbox">
+            <div>Writers</div>
+            <?php foreach ($this->data['writers'] as $data): ?>
+                <label class="checkbox-inline">
+                    <input type="checkbox" name="writers[]" value="<?= $data['id_writer']; ?>"><?=$data['writer']; ?>
+                </label>
+         <?php endforeach; ?>
+    </div>
+	
+	
+	<div class="form-group">
+            <label for="image">File input:</label>
+<!--            <input type="hidden" name="MAX_FILE_SIZE" value="30000" />-->
+            <input type="file" name="image" id="image" >
+            <p class="help-block">Please download your pictures(jpg, png, gif).Max size 3mb,max picture-1</p>
+    </div>
+	<input type="submit" class="btn btn-success" />
+</form>
+</div>

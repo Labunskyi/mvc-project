@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><?=Config::get('site_name')?></title>
+	<link rel="stylesheet" href="/webroot/css/style.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="center">
+<div class="center_view">
+
+	<div class="image_view">
+		<?php if ($data['book']['image']): ?>
+					<img src="/webroot/image/<?= $data['book']['image']; ?>">
+		<?php endif; ?>
+	</div>
+	<div class="buy_view">
+	<h3><?=$data['book']['title']?></h3>
+		
+	<?php if(array_key_exists("1", $data['writers'] )): ?>
+		<div class="writers"><label class="inline"><h6>Авторы:</h6></label>
+	<?php else: ?>
+		<div class="writers"><label class="inline"><h6>Автор:</h6></label>
+	<?php endif; ?>
+        <?php foreach ($data['writers'] as $writer): ?>
+            <a href="/writers/view/<?= $writer['alias_writer']; ?>"> <?= $writer['writer']; ?></a>
+        <?php endforeach; ?>
+		
+		</div>
+		<h4>Цена: <?=$data['book']['price']?> грн.</h4>
+		
+		<h3><span class="badge"></span></h3>
+			<?php if (Session::get('login')) : ?>
+				<form method="post" id="comment_form" action="">
+					<div class="form-group">
+							<label for="alias">Колличество</label>
+							<input type="number" id="quantity" name="quantity" value="" class="form-control" placeholder="0"/>
+					</div>
+					<div class="form-group">
+							<label for="alias">Телефон</label>
+							<input type="number" id="phone" name="phone" value="" class="form-control" placeholder="Phone"/>
+					</div>
+					<input type="hidden" id="item_alias" value="<?= $data['item_alias'] ?>">
+					<input type="hidden" id="login_user" value="<?= $value['login_user'] ?>">
+					<button type="submit" name="submit" class="btn btn-info btn-sm" onclick="alert('Спасибо за покупку, мы с Вами свяжемся!')"> Купить </button>
+				   
+		<?php else : ?>
+			<button type="submit" name="submit" class="btn btn-info btn-sm" onclick="alert('Пожалуйста зарегистрируйтесь или войдите на сайт')" > Купить </button>		
+		<?php endif; ?>
+	</div>	
+</div>
+<div class="content_view">
+	<?=$data['book']['content']?>
+</div>
+<div>
+	<h5> Просмотров: <span class="badge badge-secondary"> <?= $data['counter'][0]['cnt_visit']; ?></span></h5> 
+
+	<h5> Сообщения: <span class="badge"></h5>
+		<?php if (Session::get('login')) : ?>
+				<form method="post" id="comment_form" action="">
+					<div class="form-group">
+						<textarea rows="3" style="width: 90%" placeholder="Написать комментарий...." id="commentary" name="commentary"
+								  class="form-control"></textarea>
+					</div>
+					<input type="hidden" id="alias_book" value="<?= $data['alias_book'] ?>">
+					<button type="submit" name="submit" class="btn btn-info btn-sm"> Добавить комментарий
+					</button>
+					
+				</form>
+		<?php else : ?>
+			<div style="margin-bottom: 50px;"><a href="/users/login/">Войдите</a>, чтобы оставить комментарий</div>
+		<?php endif; ?>
+
+			<?php if ($data['commentaries']): ?>
+
+				<?php foreach ($data['commentaries'] as $key => $value): ?>
+					
+					<div class="card" style="width: 90%; margin-top: 30px;">
+						<div class="card-header" >
+							<div class="card-title">Написал: <a><?= $value['login_user'] ?></a> Дата\Время:<?= $value['date_time'] ?></div>
+						</div>
+						<div class="card-body"><?= $value['commentary'] ?></div>
+						
+					</div>
+			   <?php endforeach; ?>
+			   <?php endif; ?>     
+
+</div>
+</div>        
+</body>
+</html>

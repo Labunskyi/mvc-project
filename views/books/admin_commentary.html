@@ -1,0 +1,51 @@
+<h3>Messages</h3></br>
+<div class="admin">
+<ol class="breadcrumb">
+    
+    <?php print_r (App::getRouter()->getParams());?>
+</ol>
+<div class="admin_left" >
+            
+                
+                    <ul class="tt nav nav-pills nav-stacked">
+                        <li><a href="/admin/books/">Список книг</a></li>
+                        <li><a href="/admin/books/writer/">Добавить автора</a></li>
+                        <li><a href="/admin/books/add/">Добавить книгу</a></li>
+                        <li><a href="/admin/books/category/">Добавить жанр</a></li>
+                        <li><a href="/admin/books/sells">Список проданных товаров</a></li>
+						<li><a href="/admin/books/commentary">Комментарии</a></li>
+                    </ul>
+</li>
+</div>
+
+<div class="admin_right" >
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID:</th>
+            <th>Name:</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($data['commentary'] as $comm) : ?>
+		
+            <tr>
+                <td><?= $comm['id_commentary']?></td>
+				<td><?= $comm['alias_book']?></td>
+                <td><?= $comm['login_user']?></td>
+				<td><?= $comm['commentary']?></td>
+			<td align="right">
+                    <a href="/admin/books/deletecommentary/<?= $comm['id_commentary']?>" onclick="return confirmDelete();">
+                        <button class="btn btn-sm btn-warning">delete</button>
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+        <tbody>
+    </table>
+</div>
+
+</div>
+</div>
