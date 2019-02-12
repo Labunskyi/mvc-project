@@ -14,3 +14,5 @@
 г) информацию о заказах книг хранить в БД не нужно, она должна оставаться в письмах.
 
 Готовый результат: http://v50425oh.beget.tech/admin/users/login
+
+P.S. Проект выполнен на основе MVC фреймворка с сайта Devionity: https://devionity.com/ru/courses/creating-mvc-framework
