@@ -36,5 +36,23 @@
    
   </ul>
 </nav>
+<script>
+    $(document).ready(function() {
+        $('.page-item').click(function() {
+		
+		
+		$.ajax({
+		url: '/books/index',
+		type: 'GET',
+		data:  {test:'123'},
+		success: function(res){
+		alert(res);
+		}        
+   });
+   
+    });
+	});
+
+</script>
 </body>
 </html>
