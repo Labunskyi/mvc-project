@@ -25,13 +25,18 @@
 <?php } ?>
 <div id="target-content" >loading...</div>
 
-<div align="center">
-<ul class='pagination text-center' id="pagination">
-<?php for($i=1; $i<=($data['books']['count']); $i++):  ?>			
-	<li id="<?php echo $i;?>"><a href='/books/?page=<?php echo $i;?>'><?php echo $i;?></a></li>
-					
-<?php endfor;?>  
-</div>
+<?php if (!isset($_GET['page'])) $_GET['page'] = 1; ?>
+<nav aria-label="...">
+  <ul class="pagination">
+      <?php for ($j = 1; $j <= ($data['books']['count']); $j++) : ?>
+            <li class="page-item active <?= ($j != $_GET['page']) ? 'class="page-item active"' : ''; ?>>
+			<li class="page-item"><a class="page-link" href="/books/?page=<?= $j; ?>"><?= $j; ?></a></li>
+			
+        <?php endfor; ?>
+    
+   
+  </ul>
+</nav>
 
 </body>
 <!-- <script>
