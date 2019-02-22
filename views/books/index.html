@@ -23,36 +23,30 @@
 </div>
 <?php endif; ?>
 <?php } ?>
+<div id="target-content" >loading...</div>
 
-<?php if (!isset($_GET['page'])) $_GET['page'] = 1; ?>
-<nav aria-label="...">
-  <ul class="pagination">
-      <?php for ($j = 1; $j <= ($data['books']['count']); $j++) : ?>
-            <li class="page-item active <?= ($j != $_GET['page']) ? 'class="page-item active"' : ''; ?>>
-			<li class="page-item"><a class="page-link" href="/books/?page=<?= $j; ?>"><?= $j; ?></a></li>
-			
-        <?php endfor; ?>
-    
-   
-  </ul>
-</nav>
-<script>
-    $(document).ready(function() {
-        $('.page-item').click(function() {
-		
-		
-		$.ajax({
-		url: '/books/index',
-		type: 'GET',
-		data:  {test:'123'},
-		success: function(res){
-		alert(res);
-		}        
-   });
-   
+<div align="center">
+<ul class='pagination text-center' id="pagination">
+<?php for($i=1; $i<=($data['books']['count']); $i++):  ?>			
+	<li id="<?php echo $i;?>"><a href='/books/?page=<?php echo $i;?>'><?php echo $i;?></a></li>
+					
+<?php endfor;?>  
+</div>
+
+</body>
+<!-- <script>
+jQuery(document).ready(function() {
+jQuery("#target-content").load("/books/index/?page=1");
+    jQuery("#pagination li").live('click',function(e){
+	
+	e.preventDefault();
+	var pageNum = this.id;
+	
+    jQuery("#target-content").load("/books/index/?page=" + pageNum);
+	
     });
-	});
+    });
+</script> -->
 
-</script>
 </body>
 </html>
